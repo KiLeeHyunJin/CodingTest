@@ -13,22 +13,25 @@ namespace CodingTest.BJ
 
             int testCase = int.Parse(Console.ReadLine());
 
-            Dictionary<int, LinkedList<string>> dic = new();                        
-            HashSet<int> ints = new HashSet<int>();
-            List<KeyValuePair<int, LinkedList<string>>> searchList = new();
-            for (int i = 0; i < testCase; i++)
+            Dictionary<string, List<string>> dic = new();
+            HashSet<string> hs = new();
+            List<KeyValuePair<string, List<string>>> searchList = new();
+            for (int iTest = 0; iTest < testCase; iTest++)
             {
                 int cloths = int.Parse(Console.ReadLine());
 
                 for (int j = 0; j < cloths; j++)
                 {
-                    string[] strs = Console.ReadLine().Split(' ');
-                    int hashCode = strs[1].GetHashCode();
-                    if (dic.ContainsKey(hashCode) == false)
+                    string str = Console.ReadLine();
+                    string[] strs = str.Split(' ');
+                    if (dic.ContainsKey(strs[1]) == false)
                     {
-                        dic[hashCode] = new LinkedList<string>();
+                        dic[strs[1]] = new List<string>();
                     }
-                    dic[hashCode].AddLast(strs[0]);
+                    if(hs.Contains(strs[0]) == false)
+                    {
+                        dic[strs[1]].Add(strs[0]);
+                    }
                 }
 
 
@@ -37,24 +40,37 @@ namespace CodingTest.BJ
                 {
                     searchList.Add(item);
                 }
-                int count = 0;
-                foreach(var item in searchList)
+
+
+                int result = 0;
+
+
+                for (int i = 0; i < searchList.Count(); i++) 
                 {
-                    foreach (var item2 in item.Value)
+                    result++;//낱개
+
+                    int total = searchList[i].Value.Count(); //최대 경우의 수
+                    int count = 0;
+                    for (int j =  i + 1; j < searchList.Count(); j++)
                     {
-                        count++;
+                        result++; //2개
+                        if(j <= searchList.Count() - 2)
+                        {
+                            total *= searchList[j].Value.Count();
+                        }
+
+
                     }
+                    result += count ;
+                    result += total;
+
                 }
-                Console.WriteLine(count);
-
+                Console.WriteLine(result);
+                
+                searchList.Clear();
                 dic.Clear();
-                ints.Clear();
+                hs.Clear();
             }
-
-            Console.WriteLine("종료");
-
-
-            string[] strArr = new string[2];
         }
     }
 }

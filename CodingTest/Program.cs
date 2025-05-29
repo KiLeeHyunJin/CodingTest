@@ -9,8 +9,8 @@ namespace CodingTest
         static void Main(string[] args)
         {
 
-            BJ_9375 bJ_9375 = new BJ_9375();
-            bJ_9375.Main();
+            BJ_11279 ct = new();
+            ct.Main();
 
         }
     }

@@ -12,11 +12,14 @@ namespace CodingTest.BJ
         public void Main()
         {
             int moveCount = int.Parse(Console.ReadLine());
-            int result = 0;
-
-
-
-            Console.WriteLine(result);
+            int multipleCount = 0;
+            while(moveCount > 1)
+            {
+                multipleCount++;
+                moveCount -= multipleCount * 6;
+            }
+            multipleCount++;
+            Console.WriteLine(multipleCount);
 
         }
     }

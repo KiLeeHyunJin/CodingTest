@@ -2,14 +2,11 @@
 
 namespace CodingTest
 {
-
-    
     internal class Program
     {
         static void Main(string[] args)
         {
-
-            BJ_2839
+            BJ_11723
                 ct = new();
             ct.Main();
 

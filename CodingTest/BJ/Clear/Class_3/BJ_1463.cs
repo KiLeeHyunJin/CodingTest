@@ -29,38 +29,44 @@ namespace CodingTest.BJ
                 }
             }
 
-            if (calcCountData.TryGetValue(sourceValue, out count))// 이미 해당 값을 연산한 기록이 있을경우
             {
-                if (count <= counting) //해당 기록보다 오랜 연산을 진행
+                if (calcCountData.TryGetValue(sourceValue, out count))// 이미 해당 값을 연산한 기록이 있을경우
                 {
-                    return; //분기 종료
+                    if (count <= counting) //해당 기록보다 오랜 연산을 진행
+                    {
+                        return; //분기 종료
+                    }
+                    else
+                    {
+                        calcCountData[sourceValue] = counting; //더 짧았기때문에 새로 기록
+                    }
                 }
                 else
                 {
-                    calcCountData[sourceValue] = counting; //더 짧았기때문에 새로 기록
+                    calcCountData.Add(sourceValue, counting); //해당 값을  최초로 연산 시도하기 때문에 기록
                 }
             }
-            else
-            {
-                calcCountData.Add(sourceValue, counting); //해당 값을  최초로 연산 시도하기 때문에 기록
-            }
+         
 
             if(sourceValue == 1)
             {
                 return;
             }
 
-            ++counting;
-            
-            if (sourceValue % 3 == 0)
             {
-                SplitCalc(calcCountData, sourceValue / 3, counting);
+                ++counting;
+
+                if (sourceValue % 3 == 0)
+                {
+                    SplitCalc(calcCountData, sourceValue / 3, counting);
+                }
+                if (sourceValue % 2 == 0)
+                {
+                    SplitCalc(calcCountData, sourceValue / 2, counting);
+                }
+                SplitCalc(calcCountData, sourceValue - 1, counting);
             }
-            if(sourceValue % 2 == 0)
-            {
-                SplitCalc(calcCountData, sourceValue / 2, counting);
-            }
-            SplitCalc(calcCountData, sourceValue - 1, counting);
+          
         }
     }
 }

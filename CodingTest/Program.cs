@@ -6,7 +6,7 @@ namespace CodingTest
     {
         static void Main(string[] args)
         {
-            BJ_1463
+            BJ_2579
                 ct = new();
             ct.Main();
 
